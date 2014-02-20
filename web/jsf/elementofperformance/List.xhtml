@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.ListElementofperformanceTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:form styleClass="jsfcrud_list_form">
+                <h:panelGroup id="messagePanel" layout="block">
+                    <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+                </h:panelGroup>
+                <h:outputText escape="false" value="#{bundle.ListElementofperformanceEmpty}" rendered="#{elementofperformanceController.items.rowCount == 0}"/>
+                <h:panelGroup rendered="#{elementofperformanceController.items.rowCount > 0}">
+                    <h:outputText value="#{elementofperformanceController.pagination.pageFirstItem + 1}..#{elementofperformanceController.pagination.pageLastItem + 1}/#{elementofperformanceController.pagination.itemsCount}"/>&nbsp;
+                    <h:commandLink action="#{elementofperformanceController.previous}" value="#{bundle.Previous} #{elementofperformanceController.pagination.pageSize}" rendered="#{elementofperformanceController.pagination.hasPreviousPage}"/>&nbsp;
+                    <h:commandLink action="#{elementofperformanceController.next}" value="#{bundle.Next} #{elementofperformanceController.pagination.pageSize}" rendered="#{elementofperformanceController.pagination.hasNextPage}"/>&nbsp;
+                    <h:dataTable value="#{elementofperformanceController.items}" var="item" border="0" cellpadding="2" cellspacing="0" rowClasses="jsfcrud_odd_row,jsfcrud_even_row" rules="all" style="border:solid 1px">
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListElementofperformanceTitle_elementofperformancePK_id}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.elementofperformancePK.id}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListElementofperformanceTitle_elementofperformance}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.elementofperformance}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListElementofperformanceTitle_learningoutcome}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.learningoutcome}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="&nbsp;"/>
+                            </f:facet>
+                            <h:commandLink action="#{elementofperformanceController.prepareView}" value="#{bundle.ListElementofperformanceViewLink}"/>
+                            <h:outputText value=" "/>
+                            <h:commandLink action="#{elementofperformanceController.prepareEdit}" value="#{bundle.ListElementofperformanceEditLink}"/>
+                            <h:outputText value=" "/>
+                            <h:commandLink action="#{elementofperformanceController.destroy}" value="#{bundle.ListElementofperformanceDestroyLink}"/>
+                        </h:column>
+                    </h:dataTable>
+                </h:panelGroup>
+                <br />
+                <h:commandLink action="#{elementofperformanceController.prepareCreate}" value="#{bundle.ListElementofperformanceCreateLink}"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundle.ListElementofperformanceIndexLink}"/>
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

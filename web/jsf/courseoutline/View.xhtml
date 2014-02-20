@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.ViewCourseoutlineTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <h:panelGrid columns="2">
+                    <h:outputText value="#{bundle.ViewCourseoutlineLabel_id}"/>
+                    <h:outputText value="#{courseoutlineController.selected.id}" title="#{bundle.ViewCourseoutlineTitle_id}"/>
+                    <h:outputText value="#{bundle.ViewCourseoutlineLabel_coursetitle}"/>
+                    <h:outputText value="#{courseoutlineController.selected.coursetitle}" title="#{bundle.ViewCourseoutlineTitle_coursetitle}"/>
+                    <h:outputText value="#{bundle.ViewCourseoutlineLabel_codenumber}"/>
+                    <h:outputText value="#{courseoutlineController.selected.codenumber}" title="#{bundle.ViewCourseoutlineTitle_codenumber}"/>
+                    <h:outputText value="#{bundle.ViewCourseoutlineLabel_semester}"/>
+                    <h:outputText value="#{courseoutlineController.selected.semester}" title="#{bundle.ViewCourseoutlineTitle_semester}"/>
+                    <h:outputText value="#{bundle.ViewCourseoutlineLabel_program}"/>
+                    <h:outputText value="#{courseoutlineController.selected.program}" title="#{bundle.ViewCourseoutlineTitle_program}"/>
+                    <h:outputText value="#{bundle.ViewCourseoutlineLabel_author}"/>
+                    <h:outputText value="#{courseoutlineController.selected.author}" title="#{bundle.ViewCourseoutlineTitle_author}"/>
+                    <h:outputText value="#{bundle.ViewCourseoutlineLabel_date}"/>
+                    <h:outputText value="#{courseoutlineController.selected.date}" title="#{bundle.ViewCourseoutlineTitle_date}">
+                        <f:convertDateTime pattern="MM/dd/yyyy" />
+                    </h:outputText>
+                    <h:outputText value="#{bundle.ViewCourseoutlineLabel_previousoutlinedated}"/>
+                    <h:outputText value="#{courseoutlineController.selected.previousoutlinedated}" title="#{bundle.ViewCourseoutlineTitle_previousoutlinedated}">
+                        <f:convertDateTime pattern="MM/dd/yyyy" />
+                    </h:outputText>
+                    <h:outputText value="#{bundle.ViewCourseoutlineLabel_approvedby}"/>
+                    <h:outputText value="#{courseoutlineController.selected.approvedby}" title="#{bundle.ViewCourseoutlineTitle_approvedby}"/>
+                    <h:outputText value="#{bundle.ViewCourseoutlineLabel_totalcredits}"/>
+                    <h:outputText value="#{courseoutlineController.selected.totalcredits}" title="#{bundle.ViewCourseoutlineTitle_totalcredits}"/>
+                    <h:outputText value="#{bundle.ViewCourseoutlineLabel_prerequisites}"/>
+                    <h:outputText value="#{courseoutlineController.selected.prerequisites}" title="#{bundle.ViewCourseoutlineTitle_prerequisites}"/>
+                    <h:outputText value="#{bundle.ViewCourseoutlineLabel_copyright}"/>
+                    <h:outputText value="#{courseoutlineController.selected.copyright}" title="#{bundle.ViewCourseoutlineTitle_copyright}"/>
+                    <h:outputText value="#{bundle.ViewCourseoutlineLabel_coursedescription}"/>
+                    <h:outputText value="#{courseoutlineController.selected.coursedescription}" title="#{bundle.ViewCourseoutlineTitle_coursedescription}"/>
+                </h:panelGrid>
+                <br />
+                <h:commandLink action="#{courseoutlineController.destroyAndView}" value="#{bundle.ViewCourseoutlineDestroyLink}"/>
+                <br />
+                <br />
+                <h:link outcome="Edit" value="#{bundle.ViewCourseoutlineEditLink}"/>
+                <br />
+                <h:commandLink action="#{courseoutlineController.prepareCreate}" value="#{bundle.ViewCourseoutlineCreateLink}" />
+                <br />
+                <h:commandLink action="#{courseoutlineController.prepareList}" value="#{bundle.ViewCourseoutlineShowAllLink}"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundle.ViewCourseoutlineIndexLink}"/>
+
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.CreateLearningoutcomeTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <h:panelGrid columns="2">
+                    <h:outputLabel value="#{bundle.CreateLearningoutcomeLabel_learningoutcomePK_id}" for="learningoutcomePK_id" />
+                    <h:inputText id="learningoutcomePK_id" value="#{learningoutcomeController.selected.learningoutcomePK.id}" title="#{bundle.CreateLearningoutcomeTitle_learningoutcomePK_id}" required="true" requiredMessage="#{bundle.CreateLearningoutcomeRequiredMessage_learningoutcomePK_id}"/>
+                    <h:outputLabel value="#{bundle.CreateLearningoutcomeLabel_learningoutcome}" for="learningoutcome" />
+                    <h:inputTextarea rows="4" cols="30" id="learningoutcome" value="#{learningoutcomeController.selected.learningoutcome}" title="#{bundle.CreateLearningoutcomeTitle_learningoutcome}" />
+                    <h:outputLabel value="#{bundle.CreateLearningoutcomeLabel_courseoutline}" for="courseoutline" />
+                    <h:selectOneMenu id="courseoutline" value="#{learningoutcomeController.selected.courseoutline}" title="#{bundle.CreateLearningoutcomeTitle_courseoutline}" required="true" requiredMessage="#{bundle.CreateLearningoutcomeRequiredMessage_courseoutline}">
+                        <f:selectItems value="#{courseoutlineController.itemsAvailableSelectOne}"/>
+                    </h:selectOneMenu>
+                </h:panelGrid>
+                <br />
+                <h:commandLink action="#{learningoutcomeController.create}" value="#{bundle.CreateLearningoutcomeSaveLink}" />
+                <br />
+                <br />
+                <h:commandLink action="#{learningoutcomeController.prepareList}" value="#{bundle.CreateLearningoutcomeShowAllLink}" immediate="true"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundle.CreateLearningoutcomeIndexLink}"/>
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

@@ -1,0 +1,118 @@
+CREATE DATABASE  IF NOT EXISTS `courseoutline` /*!40100 DEFAULT CHARACTER SET utf8 COLLATE utf8_unicode_ci */;
+USE `courseoutline`;
+-- MySQL dump 10.13  Distrib 5.6.11, for Win64 (x86_64)
+--
+-- Host: localhost    Database: courseoutline
+-- ------------------------------------------------------
+-- Server version	5.6.11
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8 */;
+/*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
+/*!40103 SET TIME_ZONE='+00:00' */;
+/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
+/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
+/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
+/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
+
+--
+-- Table structure for table `courseoutline`
+--
+
+DROP TABLE IF EXISTS `courseoutline`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `courseoutline` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `coursetitle` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `codenumber` varchar(45) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `semester` int(11) DEFAULT NULL,
+  `program` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `author` varchar(45) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `date` date DEFAULT NULL,
+  `previousoutlinedated` date DEFAULT NULL,
+  `approvedby` varchar(45) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `totalcredits` int(11) DEFAULT NULL,
+  `prerequisites` varchar(45) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `copyright` mediumtext COLLATE utf8_unicode_ci,
+  `coursedescription` mediumtext COLLATE utf8_unicode_ci,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `courseoutline`
+--
+
+LOCK TABLES `courseoutline` WRITE;
+/*!40000 ALTER TABLE `courseoutline` DISABLE KEYS */;
+INSERT INTO `courseoutline` VALUES (9,'Java I','CSD221',4,'CPA','Fred Carella','2014-01-01','2014-01-15','kk',9,'d','d88888 l','d88'),(10,'Intro to Linux','CSO102',3,'CPA','Me','2014-01-12',NULL,'',NULL,'','','');
+/*!40000 ALTER TABLE `courseoutline` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `elementofperformance`
+--
+
+DROP TABLE IF EXISTS `elementofperformance`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `elementofperformance` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `elementofperformance` mediumtext COLLATE utf8_unicode_ci,
+  `learningoutcome_id` int(11) NOT NULL,
+  `learningoutcome_courseoutline_id` int(11) NOT NULL,
+  PRIMARY KEY (`id`,`learningoutcome_id`,`learningoutcome_courseoutline_id`),
+  KEY `fk_elementofperformance_learningoutcome1_idx` (`learningoutcome_id`,`learningoutcome_courseoutline_id`),
+  CONSTRAINT `fk_elementofperformance_learningoutcome1` FOREIGN KEY (`learningoutcome_id`, `learningoutcome_courseoutline_id`) REFERENCES `learningoutcome` (`id`, `courseoutline_id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `elementofperformance`
+--
+
+LOCK TABLES `elementofperformance` WRITE;
+/*!40000 ALTER TABLE `elementofperformance` DISABLE KEYS */;
+/*!40000 ALTER TABLE `elementofperformance` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `learningoutcome`
+--
+
+DROP TABLE IF EXISTS `learningoutcome`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `learningoutcome` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `learningoutcome` mediumtext COLLATE utf8_unicode_ci,
+  `courseoutline_id` int(11) NOT NULL,
+  PRIMARY KEY (`id`,`courseoutline_id`),
+  KEY `fk_learningoutcome_courseoutline_idx` (`courseoutline_id`),
+  CONSTRAINT `fk_learningoutcome_courseoutline` FOREIGN KEY (`courseoutline_id`) REFERENCES `courseoutline` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB AUTO_INCREMENT=27 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `learningoutcome`
+--
+
+LOCK TABLES `learningoutcome` WRITE;
+/*!40000 ALTER TABLE `learningoutcome` DISABLE KEYS */;
+INSERT INTO `learningoutcome` VALUES (1,'q',9),(13,'e',9),(14,'1',9),(15,'5',9),(16,'y',9),(17,'u',9),(18,'i',9),(19,'o',9),(20,'m',9),(21,'b ',9),(22,'1',10),(23,'2',10),(24,'3',10),(25,'fcfff',9),(26,NULL,9);
+/*!40000 ALTER TABLE `learningoutcome` ENABLE KEYS */;
+UNLOCK TABLES;
+/*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
+
+/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
+/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
+/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
+
+-- Dump completed on 2014-01-10 14:01:20

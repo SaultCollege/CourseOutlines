@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.ListCourseoutlineTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:form styleClass="jsfcrud_list_form">
+                <h:panelGroup id="messagePanel" layout="block">
+                    <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+                </h:panelGroup>
+                <h:outputText escape="false" value="#{bundle.ListCourseoutlineEmpty}" rendered="#{courseoutlineController.items.rowCount == 0}"/>
+                <h:panelGroup rendered="#{courseoutlineController.items.rowCount > 0}">
+                    <h:outputText value="#{courseoutlineController.pagination.pageFirstItem + 1}..#{courseoutlineController.pagination.pageLastItem + 1}/#{courseoutlineController.pagination.itemsCount}"/>&nbsp;
+                    <h:commandLink action="#{courseoutlineController.previous}" value="#{bundle.Previous} #{courseoutlineController.pagination.pageSize}" rendered="#{courseoutlineController.pagination.hasPreviousPage}"/>&nbsp;
+                    <h:commandLink action="#{courseoutlineController.next}" value="#{bundle.Next} #{courseoutlineController.pagination.pageSize}" rendered="#{courseoutlineController.pagination.hasNextPage}"/>&nbsp;
+                    <h:dataTable value="#{courseoutlineController.items}" var="item" border="0" cellpadding="2" cellspacing="0" rowClasses="jsfcrud_odd_row,jsfcrud_even_row" rules="all" style="border:solid 1px">
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListCourseoutlineTitle_id}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.id}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListCourseoutlineTitle_coursetitle}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.coursetitle}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListCourseoutlineTitle_codenumber}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.codenumber}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListCourseoutlineTitle_semester}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.semester}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListCourseoutlineTitle_program}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.program}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListCourseoutlineTitle_author}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.author}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListCourseoutlineTitle_date}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.date}">
+                                <f:convertDateTime pattern="MM/dd/yyyy" />
+                            </h:outputText>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListCourseoutlineTitle_previousoutlinedated}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.previousoutlinedated}">
+                                <f:convertDateTime pattern="MM/dd/yyyy" />
+                            </h:outputText>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListCourseoutlineTitle_approvedby}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.approvedby}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListCourseoutlineTitle_totalcredits}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.totalcredits}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListCourseoutlineTitle_prerequisites}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.prerequisites}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListCourseoutlineTitle_copyright}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.copyright}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListCourseoutlineTitle_coursedescription}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.coursedescription}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="&nbsp;"/>
+                            </f:facet>
+                            <h:commandLink action="#{courseoutlineController.prepareView}" value="#{bundle.ListCourseoutlineViewLink}"/>
+                            <h:outputText value=" "/>
+                            <h:commandLink action="#{courseoutlineController.prepareEdit}" value="#{bundle.ListCourseoutlineEditLink}"/>
+                            <h:outputText value=" "/>
+                            <h:commandLink action="#{courseoutlineController.destroy}" value="#{bundle.ListCourseoutlineDestroyLink}"/>
+                        </h:column>
+                    </h:dataTable>
+                </h:panelGroup>
+                <br />
+                <h:commandLink action="#{courseoutlineController.prepareCreate}" value="#{bundle.ListCourseoutlineCreateLink}"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundle.ListCourseoutlineIndexLink}"/>
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

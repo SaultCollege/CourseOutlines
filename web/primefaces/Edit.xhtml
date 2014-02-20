@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this template, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"  
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      >
+    <h:head>
+        <title>Course Outlines</title>
+    </h:head>
+
+
+    <h:body>
+        <p:layout fullPage="true">  
+            <p:layoutUnit position="north" size="100" resizable="true" closable="true" collapsible="true"> 
+                <p:ajaxStatus id="ajaxStatusPanel" style="padding:0px;margin:0px;">  
+                    <f:facet name="start">  
+                        <h:graphicImage value="/resources/images/ajaxgolfball.gif" />  
+                    </f:facet>  
+                    <f:facet name="complete">  
+                        <h:outputText value="" />  
+                    </f:facet>  
+                </p:ajaxStatus>
+            </p:layoutUnit>
+            <p:layoutUnit position="south" size="100" header="Bottom" resizable="true" closable="true" collapsible="true">  
+            </p:layoutUnit>
+            <p:layoutUnit position="west" size="200" header="Left" resizable="true" closable="true" collapsible="true">
+            </p:layoutUnit>
+            <p:layoutUnit position="east" size="200" header="Right" resizable="true" closable="true" collapsible="true" effect="drop">  
+            </p:layoutUnit>
+
+            <p:layoutUnit position="center">
+                <h:form>
+                    <p:growl id="msg" sticky="false" showDetail="true" />  
+                    <br/>
+                    <h:panelGrid columns="2" style="width:100%"> 
+                        <p:outputLabel value="#{bundle.EditCourseoutlineLabel_coursetitle}" for="coursetitle" />
+                        <p:inputText id="coursetitle" value="#{courseoutlineController.selected.coursetitle}" title="#{bundle.EditCourseoutlineTitle_coursetitle}">
+                            <p:ajax listener="#{courseoutlineController.update()}" update="msg"/>
+                        </p:inputText>
+                        <p:outputLabel value="#{bundle.EditCourseoutlineLabel_codenumber}" for="codenumber" />
+                        <p:inputText id="codenumber" value="#{courseoutlineController.selected.codenumber}" title="#{bundle.EditCourseoutlineTitle_codenumber}" >
+                            <p:ajax listener="#{courseoutlineController.update()}" update="msg"/>
+                        </p:inputText>
+                        <p:outputLabel value="#{bundle.EditCourseoutlineLabel_semester}" for="semester" />
+                        <p:inputText id="semester" value="#{courseoutlineController.selected.semester}" title="#{bundle.EditCourseoutlineTitle_semester}" >
+                            <p:ajax listener="#{courseoutlineController.update()}" update="msg"/>
+                        </p:inputText>
+                        <p:outputLabel value="#{bundle.EditCourseoutlineLabel_program}" for="program" />
+                        <p:inputText id="program" value="#{courseoutlineController.selected.program}" title="#{bundle.EditCourseoutlineTitle_program}" >
+                            <p:ajax listener="#{courseoutlineController.update()}" update="msg"/>
+                        </p:inputText>
+                        <p:outputLabel value="#{bundle.EditCourseoutlineLabel_author}" for="author" />
+                        <p:inputText id="author" value="#{courseoutlineController.selected.author}" title="#{bundle.EditCourseoutlineTitle_author}">
+                            <p:ajax listener="#{courseoutlineController.update()}" update="msg"/>
+                        </p:inputText>
+
+                        <p:outputLabel value="#{bundle.EditCourseoutlineLabel_date}"/>
+                        <p:calendar value="#{courseoutlineController.selected.date}" id="popupCal1" pattern="EEE, MMM dd, yyyy">
+                            <p:ajax event="dateSelect" listener="#{courseoutlineController.update()}" update="msg"/>
+                        </p:calendar>
+                        <p:outputLabel value="#{bundle.EditCourseoutlineLabel_previousoutlinedated}"/>
+                        <p:calendar  value="#{courseoutlineController.selected.previousoutlinedated}" id="popupCal2" pattern="EEE, MMM dd, yyyy">
+                            <p:ajax event="dateSelect" listener="#{courseoutlineController.update()}" update="msg"/>
+                        </p:calendar>
+                        <p:outputLabel value="#{bundle.EditCourseoutlineLabel_approvedby}" for="approvedby" />
+                        <p:inputText id="approvedby" value="#{courseoutlineController.selected.approvedby}" title="#{bundle.EditCourseoutlineTitle_approvedby}" >
+                            <p:ajax listener="#{courseoutlineController.update()}" update="msg"/>
+                        </p:inputText>
+                        <p:outputLabel value="#{bundle.EditCourseoutlineLabel_totalcredits}" for="totalcredits" />
+                        <p:inputText id="totalcredits" value="#{courseoutlineController.selected.totalcredits}" title="#{bundle.EditCourseoutlineTitle_totalcredits}" >
+                            <p:ajax listener="#{courseoutlineController.update()}" update="msg"/>
+                        </p:inputText>
+                        <p:outputLabel value="#{bundle.EditCourseoutlineLabel_prerequisites}" for="prerequisites" />
+                        <p:inputText id="prerequisites" value="#{courseoutlineController.selected.prerequisites}" title="#{bundle.EditCourseoutlineTitle_prerequisites}" >
+                            <p:ajax listener="#{courseoutlineController.update()}" update="msg"/>
+                        </p:inputText>
+                        <p:outputLabel value="#{bundle.EditCourseoutlineLabel_copyright}" for="copyright" />
+                        <p:inputTextarea rows="4" cols="30" id="copyright" value="#{courseoutlineController.selected.copyright}" title="#{bundle.EditCourseoutlineTitle_copyright}" >
+                            <p:ajax listener="#{courseoutlineController.update()}" update="msg"/>
+                        </p:inputTextarea>
+                        <p:outputLabel value="#{bundle.EditCourseoutlineLabel_coursedescription}" for="coursedescription" />
+                        <p:inputTextarea rows="4" cols="30" id="coursedescription" value="#{courseoutlineController.selected.coursedescription}" title="#{bundle.EditCourseoutlineTitle_coursedescription}" >
+                            <p:ajax listener="#{courseoutlineController.update()}" update="msg"/>
+                        </p:inputTextarea>
+                        <p:outputLabel value="Learning Outcomes" for="coursedescription" />
+                        <p:commandLink rendered="#{empty learningoutcomeController.items}" ajax="true" update="@all" actionListener="#{learningoutcomeController.myCreate()}" value="New outcome"/>
+                        <p:dataTable rendered="#{not empty learningoutcomeController.items}" id="dataTable"  var="item" value="#{learningoutcomeController.items}" style="font-size: .8em;" >
+                            <p:column headerText="Learning Outcome" id="c1" style="font-size: 1em;">
+                                <h:inputTextarea rows="4" cols="60" id="learningoutcome" value="#{item.learningoutcome}" title="#{bundle.EditLearningoutcomeTitle_learningoutcome}">
+                                    <p:ajax listener="#{learningoutcomeController.myUpdate}" update=":#{p:component('msg')}"/>
+                                </h:inputTextarea>
+                            </p:column>
+                        </p:dataTable>
+                        <p:outputLabel value="Learning Outcomes" for="coursedescription" />
+                            <p:commandLink ajax="true" update="dataTable" actionListener="#{learningoutcomeController.myCreate()}" value="Add Outcome"/>
+                    </h:panelGrid>
+                </h:form>
+
+            </p:layoutUnit>
+        </p:layout>
+    </h:body>
+
+</html>

@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.EditElementofperformanceTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <h:panelGrid columns="2">
+                    <h:outputLabel value="#{bundle.EditElementofperformanceLabel_elementofperformancePK_id}" for="elementofperformancePK_id" />
+                    <h:inputText id="elementofperformancePK_id" value="#{elementofperformanceController.selected.elementofperformancePK.id}" title="#{bundle.EditElementofperformanceTitle_elementofperformancePK_id}" required="true" requiredMessage="#{bundle.EditElementofperformanceRequiredMessage_elementofperformancePK_id}"/>
+                    <h:outputLabel value="#{bundle.EditElementofperformanceLabel_elementofperformance}" for="elementofperformance" />
+                    <h:inputTextarea rows="4" cols="30" id="elementofperformance" value="#{elementofperformanceController.selected.elementofperformance}" title="#{bundle.EditElementofperformanceTitle_elementofperformance}" />
+                    <h:outputLabel value="#{bundle.EditElementofperformanceLabel_learningoutcome}" for="learningoutcome" />
+                    <h:selectOneMenu id="learningoutcome" value="#{elementofperformanceController.selected.learningoutcome}" title="#{bundle.EditElementofperformanceTitle_learningoutcome}" required="true" requiredMessage="#{bundle.EditElementofperformanceRequiredMessage_learningoutcome}">
+                        <f:selectItems value="#{learningoutcomeController.itemsAvailableSelectOne}"/>
+                    </h:selectOneMenu>
+                </h:panelGrid>
+                <h:commandLink action="#{elementofperformanceController.update}" value="#{bundle.EditElementofperformanceSaveLink}"/>
+                <br />
+                <br />
+                <h:link outcome="View" value="#{bundle.EditElementofperformanceViewLink}"/>
+                <br />
+                <h:commandLink action="#{elementofperformanceController.prepareList}" value="#{bundle.EditElementofperformanceShowAllLink}" immediate="true"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundle.EditElementofperformanceIndexLink}" />
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>
